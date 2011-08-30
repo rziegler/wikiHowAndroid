@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="Settings">
+
+	<PreferenceCategory android:title="Settings"
+		android:key="settings">
+		<ListPreference android:title="@string/fontsize_name"
+			android:key="fontSize" android:entries="@array/fontSize"
+			android:summary="@array/fontSize" android:entryValues="@array/fontSizeValues"
+			android:defaultValue="fontSmall" />
+
+		<ListPreference android:title="@string/cachelife_name"
+			android:key="cacheLife" android:entries="@array/cacheLife"
+			android:summary="The number of days to hold the articles in cache."
+			android:entryValues="@array/cacheLifeValues" android:defaultValue="cacheNever" />
+
+		<CheckBoxPreference android:title="Enable shake"
+			android:key="enableShake" android:summary="Show random article when shaked."
+			android:defaultValue="true" />
+
+		<CheckBoxPreference android:title="Offline search"
+			android:key="offlineSearch" android:summary="Enable offline search only."
+			android:defaultValue="false" />
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="About" android:key="about">
+	
+	</PreferenceCategory>
+
+</PreferenceScreen>

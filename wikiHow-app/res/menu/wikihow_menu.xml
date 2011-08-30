@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:title="@string/survivalkit_name" android:id="@+id/survivalkit"
+		android:icon="@drawable/survival_kit"></item>
+	<item android:title="@string/featured_name" android:id="@+id/featured"
+		android:icon="@drawable/settings"></item>
+	<item android:title="@string/bookmarks_name" android:id="@+id/bookmarks"
+		android:icon="@drawable/settings"></item>
+	<item android:title="@string/search_name" android:id="@+id/search"
+		android:icon="@drawable/magnifying_glass"></item>
+	<item android:title="@string/settings_name" android:id="@+id/settings"
+		android:icon="@drawable/settings"></item>
+
+</menu>

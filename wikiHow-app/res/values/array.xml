@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="fontSize">
+		<item name="fontSmall">Small</item>
+		<item name="fontMedium">Medium</item>
+		<item name="fontBig">Big</item>
+	</string-array>
+	
+		<string-array name="fontSizeValues">
+		<item name="fontSmall">0</item>
+		<item name="fontMedium">1</item>
+		<item name="fontBig">2</item>
+	</string-array>
+	
+	<string-array name="cacheLife">
+		<item name="cacheSeven">7 days</item>
+		<item name="cacheFourteen">14 days</item>
+		<item name="cacheNever">Never</item>
+	</string-array>
+	
+		<string-array name="cacheLifeValues">
+		<item name="cacheSeven">7</item>
+		<item name="cacheFourteen">14</item>
+		<item name="cacheNever">-1</item>
+	</string-array>
+</resources>

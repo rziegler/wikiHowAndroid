@@ -2,4 +2,12 @@
 <resources>
     <string name="hello">Hello Ruth!!!</string>
     <string name="app_name">wikiHow</string>
+    <string name="article_name">Article</string>
+    <string name="survivalkit_name">Survival Kit</string>
+    <string name="featured_name">Featured</string>
+    <string name="bookmarks_name">Bookmarks</string>
+    <string name="search_name">Search</string>
+    <string name="settings_name">Settings</string>
+    <string name="fontsize_name">Font Size</string>
+    <string name="cachelife_name">Delete Cache After</string>
 </resources>

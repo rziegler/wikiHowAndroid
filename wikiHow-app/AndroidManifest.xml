@@ -13,6 +13,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Preferences" android:label="@string/settings_name"></activity>
+        <activity android:name=".SurvivalKitActivity" android:label="@string/survivalkit_name"></activity>
 
     </application>
 </manifest>

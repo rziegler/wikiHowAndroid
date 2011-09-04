@@ -6,7 +6,7 @@
 		<item name="fontBig">Big</item>
 	</string-array>
 	
-		<string-array name="fontSizeValues">
+	<string-array name="fontSizeValues">
 		<item name="fontSmall">0</item>
 		<item name="fontMedium">1</item>
 		<item name="fontBig">2</item>

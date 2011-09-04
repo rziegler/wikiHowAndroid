@@ -42,9 +42,13 @@ public class WikiHowAppActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		Log.d(TAG, "onOptionsItemSelected " + item.getItemId());
 		switch (item.getItemId()) {
 		case R.id.survivalkit:
 			Log.d(TAG, "SURVIVAL KIT MENU selected");
+			intent = new Intent(getBaseContext(), SurvivalKitActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.featured:
 			Log.d(TAG, "FEATURED MENU selected");
@@ -57,7 +61,7 @@ public class WikiHowAppActivity extends Activity {
 			return true;
 		case R.id.settings:
 			Log.d(TAG, "SETTINGS MENU selected");
-			Intent intent = new Intent(getBaseContext(), Preferences.class);
+			intent = new Intent(getBaseContext(), Preferences.class);
 			startActivity(intent);
 			return true;
 		default:

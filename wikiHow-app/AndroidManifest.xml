@@ -12,8 +12,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Preferences" android:label="@string/settings_name"></activity>
+        <activity android:name=".WikiHowPreferencesActivity" android:label="@string/survivalkit_name"></activity>
         <activity android:name=".SurvivalKitActivity" android:label="@string/survivalkit_name"></activity>
+        <activity android:name=".AboutActivity" android:label="@string/about_name_short"></activity>
 
     </application>
 </manifest>

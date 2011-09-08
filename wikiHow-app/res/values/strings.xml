@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="done">Done</string>
     <string name="hello">Hello Ruth!!!</string>
     <string name="app_name">wikiHow</string>
     <string name="article_name">Article</string>
@@ -10,4 +11,17 @@
     <string name="settings_name">Settings</string>
     <string name="fontsize_name">Font Size</string>
     <string name="cachelife_name">Delete Cache After</string>
+    <string name="about_name">About wikiHow App</string>
+    <string name="about_name_short">About</string>
+    <string name="tips_name">wikiHow Tips</string>
+    
+    <string name="about_version">Version 1.0</string>
+    <string name="about_text">This application is open source software. For more information or a copy of the code, please see http://www.wikihow.com/wikiHow:IPhone</string>
+    <string name="about_dialog">wikiHow Tips Todo: Create a custom dialog.</string>
+    
+    <!-- Keys -->
+    <string name="fontsize_key">fontSizeKey</string>
+    <string name="cachelife_key">cacheLifeKey</string>
+    <string name="about_key">aboutKey</string>
+    <string name="tips_key">tipsKey</string>
 </resources>

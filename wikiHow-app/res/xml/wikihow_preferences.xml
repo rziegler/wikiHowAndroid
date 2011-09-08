@@ -2,15 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	android:title="Settings">
 
-	<PreferenceCategory android:title="Settings" android:key="settings">
+	<PreferenceCategory android:title="Settings" android:key="settingsTitle">
 	
 		<ListPreference android:title="@string/fontsize_name"
-			android:key="fontSize" android:entries="@array/fontSize"
+			android:key="@string/fontsize_key" android:entries="@array/fontSize"
 			android:entryValues="@array/fontSizeValues"
 			android:defaultValue="fontSmall" />
 
 		<ListPreference android:title="@string/cachelife_name"
-			android:key="cacheLife" android:entries="@array/cacheLife"
+			android:key="@string/cachelife_key" android:entries="@array/cacheLife"
 			android:entryValues="@array/cacheLifeValues" android:defaultValue="cacheNever" />
 
 		<CheckBoxPreference android:title="Enable shake"
@@ -22,8 +22,12 @@
 			android:defaultValue="false" />
 	</PreferenceCategory>
 	
-	<PreferenceCategory android:title="About" android:key="about">
+	<PreferenceCategory android:title="About" android:key="aboutTitle">
 	
+		<Preference android:title="@string/about_name" android:key="@string/about_key"/>
+			
+		<Preference android:title="@string/tips_name" android:key="@string/tips_key"/>
+		
 	</PreferenceCategory>
-
 </PreferenceScreen>
+

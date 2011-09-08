@@ -61,7 +61,7 @@ public class WikiHowAppActivity extends Activity {
 			return true;
 		case R.id.settings:
 			Log.d(TAG, "SETTINGS MENU selected");
-			intent = new Intent(getBaseContext(), Preferences.class);
+			intent = new Intent(getBaseContext(), WikiHowPreferencesActivity.class);
 			startActivity(intent);
 			return true;
 		default:

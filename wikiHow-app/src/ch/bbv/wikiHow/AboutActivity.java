@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
- * About view for settings.
+ * About view used in settings.
  * 
  * @author ruthziegler
  * 

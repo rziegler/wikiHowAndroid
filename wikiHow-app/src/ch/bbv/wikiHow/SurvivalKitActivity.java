@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import ch.bbv.wikiHow.dal.ArticlePreloadedCache;
 
 public class SurvivalKitActivity extends ListActivity {
@@ -23,7 +23,7 @@ public class SurvivalKitActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "SurvivalKitActivity onCreate...");
         try {
-            preloadedCache = new ArticlePreloadedCache(this);
+            this.preloadedCache = new ArticlePreloadedCache(this);
         }
         catch(final IOException e) {
             Log.d(TAG, "Could not create ArticlePreloadedChache");
@@ -34,17 +34,17 @@ public class SurvivalKitActivity extends ListActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        preloadedCache.close();
+        this.preloadedCache.close();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "SurvivalKitActivity onResume...");
-        preloadedCache.open();
-        final List<String> categories = preloadedCache.getPreloadedCategories();
+        this.preloadedCache.open();
+        final List<String> categories = this.preloadedCache.getAllCategories();
         Log.d(TAG, "Fetched categories " + categories.size());
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.rowlayout, R.id.label, categories));
+        this.setListAdapter(new ArrayAdapter<String>(this, R.layout.rowlayout, R.id.label, categories));
     }
 
     @Override
@@ -53,7 +53,13 @@ public class SurvivalKitActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
         // Get the item that was clicked
         final Object o = this.getListAdapter().getItem(position);
-        final String keyword = o.toString();
-        Toast.makeText(this, "You selected: " + keyword, Toast.LENGTH_LONG).show();
+
+        final Intent intent = new Intent(this, SurvivalKitArticlesActivity.class);
+        final Bundle bundle = new Bundle();
+        bundle.putString(SurvivalKitArticlesActivity.CATEGORY_KEY, o.toString());
+        intent.putExtras(bundle);
+
+        Log.d(TAG, "SurvivalKitActivity starting SurvialKitArticles Activity for " + o.toString());
+        this.startActivity(intent);
     }
 }

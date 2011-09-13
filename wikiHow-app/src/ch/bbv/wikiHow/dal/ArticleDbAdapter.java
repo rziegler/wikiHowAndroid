@@ -19,6 +19,8 @@ package ch.bbv.wikiHow.dal;
 import static ch.bbv.wikiHow.WikiHowAppActivity.TAG;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -27,14 +29,11 @@ import android.util.Log;
 import ch.bbv.wikiHow.model.Article;
 
 /**
- * Simple notes database access helper class. Defines the basic CRUD operations
- * for the notepad example, and gives the ability to list all notes as well as
+ * Simple notes database access helper class. Defines the basic CRUD operations for the notepad example, and gives the ability to list all notes as well as
  * retrieve or modify a specific note.
  * 
- * This has been improved from the first version of this tutorial through the
- * addition of better error handling and also using returning a Cursor instead
- * of using a collection of inner classes (which is less scalable and not
- * recommended).
+ * This has been improved from the first version of this tutorial through the addition of better error handling and also using returning a Cursor instead of
+ * using a collection of inner classes (which is less scalable and not recommended).
  */
 class ArticleDbAdapter {
 
@@ -45,11 +44,10 @@ class ArticleDbAdapter {
     public static final String KEY_HTML = "html";
     public static final String KEY_CATEGORY = "category";
 
-    private DatabaseHelper databaseHelper;
+    private final DatabaseHelper databaseHelper;
 
     /**
-     * Constructor - takes the context to allow the database to be
-     * opened/created
+     * Constructor - takes the context to allow the database to be opened/created
      * 
      * @param ctx
      *            the Context within which to work
@@ -59,12 +57,10 @@ class ArticleDbAdapter {
     }
 
     /**
-     * Open the notes database. If it cannot be opened, try to create a new
-     * instance of the database. If it cannot be created, throw an exception to
-     * signal the failure
+     * Open the notes database. If it cannot be opened, try to create a new instance of the database. If it cannot be created, throw an exception to signal the
+     * failure
      * 
-     * @return this (self reference, allowing this to be chained in an
-     *         initialization call)
+     * @return this (self reference, allowing this to be chained in an initialization call)
      * @throws SQLException
      *             if the database could be neither opened or created
      * @throws IOException
@@ -81,9 +77,8 @@ class ArticleDbAdapter {
     }
 
     /**
-     * Create a new note using the title and body provided. If the note is
-     * successfully created return the new rowId for that note, otherwise return
-     * a -1 to indicate failure.
+     * Create a new note using the title and body provided. If the note is successfully created return the new rowId for that note, otherwise return a -1 to
+     * indicate failure.
      * 
      * @param article
      *            the article to create.
@@ -102,6 +97,7 @@ class ArticleDbAdapter {
     /**
      * Delete the note with the given rowId
      * 
+     * 
      * @param rowId
      *            id of note to delete
      * @return true if deleted, false otherwise
@@ -110,63 +106,99 @@ class ArticleDbAdapter {
         return this.databaseHelper.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
-    /**
-     * Return a Cursor over the list of all notes in the database
-     * 
-     * @return Cursor over all notes
-     */
-    public Cursor fetchAllArticles() {
-        return this.databaseHelper.query(DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_HTML, KEY_CATEGORY }, null, null, null, null,
-                null);
-    }
+    // public Cursor fetchAllArticles() {
+    // return this.databaseHelper.query(DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_HTML, KEY_CATEGORY }, null, null, null, null,
+    // null);
+    // }
 
     /**
-     * Return a Cursor positioned at the note that matches the given rowId
+     * Returns all categories for which articles are stored.
      * 
-     * @param rowId
-     *            id of note to retrieve
-     * @return Cursor positioned to matching note, if found
-     * @throws SQLException
-     *             if note could not be found/retrieved
+     * @return List of categories - never null
      */
-    public Cursor fetchAllCategories() throws SQLException {
+    public List<String> fetchAllCategories() throws SQLException {
         Log.d(TAG, "Fetching all categories on " + this.databaseHelper);
-        return this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_CATEGORY }, null, null, null, null, null, null);
+        final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_CATEGORY }, null, null, null, null, null, null);
+
+        final List<String> result = new ArrayList<String>();
+        if(cursor != null) {
+            while(cursor.moveToNext()) {
+                result.add(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_CATEGORY)));
+            }
+        }
+
+        return result;
     }
 
     /**
-     * Return a Cursor positioned at the note that matches the given rowId
+     * Returns the article by the {@code identifier}.
      * 
-     * @param rowId
-     *            id of note to retrieve
-     * @return Cursor positioned to matching note, if found
-     * @throws SQLException
-     *             if note could not be found/retrieved
+     * @param identifier
+     *            of the article
+     * @return the article or {@code null} if not found
      */
-    public Cursor fetchArticle(final String identifier) throws SQLException {
-        final Cursor mCursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_CATEGORY },
+    public Article fetchArticle(final String identifier) throws SQLException {
+        final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_CATEGORY },
                 KEY_IDENTIFIER + "=" + identifier, null, null, null, null, null);
-        if(mCursor != null) {
-            mCursor.moveToFirst();
+
+        Article result = null;
+        if(cursor != null) {
+            cursor.moveToFirst();
+
+            result = new Article();
+            result.setIdentifier(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_IDENTIFIER)));
+            result.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_TITLE)));
+            result.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_CATEGORY)));
+            result.setCached(true);
+
+            cursor.close();
         }
-        return mCursor;
+
+        return result;
     }
 
     /**
-     * Return a Cursor positioned at the note that matches the given rowId
+     * Returns the HTML content of the article by the {@code identifier}.
      * 
-     * @param rowId
-     *            id of note to retrieve
-     * @return Cursor positioned to matching note, if found
-     * @throws SQLException
-     *             if note could not be found/retrieved
+     * @return the HTML content or {@code null} if not found
      */
-    public Cursor fetchArticleHtml(final String identifier) throws SQLException {
-        final Cursor mCursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_HTML }, KEY_IDENTIFIER + "=" + identifier, null,
+    public String fetchArticleHtml(final String identifier) throws SQLException {
+        final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_HTML }, KEY_IDENTIFIER + "=" + identifier, null,
                 null, null, null, null);
-        if(mCursor != null) {
-            mCursor.moveToFirst();
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+            final String html = cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_HTML));
+            cursor.close();
+            return html;
         }
-        return mCursor;
+
+        return null;
+    }
+
+    /**
+     * Returns a list of articles matching the {@code selection}.
+     * 
+     * @param selection
+     *            a condition of type {@code identifier=test}
+     * @return list of articles - never null
+     */
+    public List<Article> queryArticle(final String selection) throws SQLException {
+        final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_CATEGORY }, selection,
+                null, null, null, KEY_TITLE, null);
+
+        final ArrayList<Article> articles = new ArrayList<Article>();
+        if(cursor != null) {
+            while(cursor.moveToNext()) {
+                final Article result = new Article();
+                result.setIdentifier(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_IDENTIFIER)));
+                result.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_TITLE)));
+                result.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(ArticleDbAdapter.KEY_CATEGORY)));
+                result.setCached(true);
+                articles.add(result);
+            }
+        }
+
+        return articles;
     }
 }

@@ -62,8 +62,6 @@ public class SurvivalKitArticlesActivity extends ListActivity {
 		}
 
 		Log.d(TAG, "Fetched articles " + this.articles.size());
-		// this.setListAdapter(new ArrayAdapter<String>(this,
-		// R.layout.category_list, R.id.label, titles));
 		this.setListAdapter(new ImagesAdapter(this, titles, "-"));
 	}
 

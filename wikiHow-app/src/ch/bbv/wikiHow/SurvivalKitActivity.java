@@ -55,9 +55,9 @@ public class SurvivalKitActivity extends ListActivity {
 		// Get the item that was clicked
 		final HashMap<String, Object> map = (HashMap<String, Object>) this.getListAdapter().getItem(position);
 
-		final Intent intent = new Intent(this, SurvivalKitArticlesActivity.class);
+		final Intent intent = new Intent(this, SurvivalKitCategoryActivity.class);
 		final Bundle bundle = new Bundle();
-		bundle.putString(SurvivalKitArticlesActivity.CATEGORY_KEY, map.get("title").toString());
+		bundle.putString(SurvivalKitCategoryActivity.KEY_CATEGORY, map.get("title").toString());
 		intent.putExtras(bundle);
 
 		Log.d(TAG, "SurvivalKitActivity starting SurvialKitArticles Activity for " + map.get("title").toString());

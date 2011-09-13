@@ -19,6 +19,8 @@
 
 		<activity android:name=".WikiHowPreferencesActivity" android:label="@string/survivalkit_name"></activity>
 		<activity android:name=".SurvivalKitActivity" android:label="@string/survivalkit_name"></activity>
+		<activity android:name=".SurvivalKitCategoryActivity" android:label="@string/survivalkit_name"></activity>
+		<activity android:name=".ArticleActivity" android:label="@string/survivalkit_name"></activity>
 		<activity android:name=".AboutActivity" android:label="@string/about_name_short"></activity>
 
 		<!-- the searchable activity, it performs searches -->
@@ -28,6 +30,5 @@
 			</intent-filter>
 			<meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
 		</activity>
-		<activity android:label="@string/survivalkit_name" android:name=".SurvivalKitArticlesActivity"></activity>
 	</application>
 </manifest>

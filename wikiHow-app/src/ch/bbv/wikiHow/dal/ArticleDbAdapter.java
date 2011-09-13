@@ -106,11 +106,6 @@ class ArticleDbAdapter {
         return this.databaseHelper.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
-    // public Cursor fetchAllArticles() {
-    // return this.databaseHelper.query(DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_HTML, KEY_CATEGORY }, null, null, null, null,
-    // null);
-    // }
-
     /**
      * Returns all categories for which articles are stored.
      * 
@@ -139,7 +134,7 @@ class ArticleDbAdapter {
      */
     public Article fetchArticle(final String identifier) throws SQLException {
         final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_CATEGORY },
-                KEY_IDENTIFIER + "=" + identifier, null, null, null, null, null);
+                this.createIdentifierCondition(identifier), null, null, null, null, null);
 
         Article result = null;
         if(cursor != null) {
@@ -163,8 +158,8 @@ class ArticleDbAdapter {
      * @return the HTML content or {@code null} if not found
      */
     public String fetchArticleHtml(final String identifier) throws SQLException {
-        final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_HTML }, KEY_IDENTIFIER + "=" + identifier, null,
-                null, null, null, null);
+        final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_HTML }, this.createIdentifierCondition(identifier),
+                null, null, null, null, null);
 
         if(cursor != null) {
             cursor.moveToFirst();
@@ -200,5 +195,9 @@ class ArticleDbAdapter {
         }
 
         return articles;
+    }
+
+    private String createIdentifierCondition(final String identifier) {
+        return KEY_IDENTIFIER + " = '" + identifier + "'";
     }
 }

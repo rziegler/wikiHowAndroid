@@ -18,33 +18,34 @@ public final class R {
     }
     public static final class drawable {
         public static final int about_wikihow=0x7f020000;
-        public static final int howto_book=0x7f020001;
-        public static final int icon=0x7f020002;
-        public static final int magnifying_glass=0x7f020003;
-        public static final int settings=0x7f020004;
-        public static final int survival_kit=0x7f020005;
+        public static final int icon=0x7f020001;
+        public static final int magnifying_glass=0x7f020002;
+        public static final int settings=0x7f020003;
+        public static final int survival_kit=0x7f020004;
     }
     public static final class id {
         public static final int about_image=0x7f080000;
-        public static final int bookmarks=0x7f080009;
-        public static final int category_image=0x7f080001;
-        public static final int category_title=0x7f080002;
-        public static final int featured=0x7f080008;
-        public static final int icon=0x7f080003;
-        public static final int label=0x7f080005;
-        public static final int search=0x7f08000a;
-        public static final int searchTextView=0x7f080006;
-        public static final int settings=0x7f08000b;
-        public static final int survivalkit=0x7f080007;
-        public static final int textView01=0x7f080004;
+        public static final int bookmarks=0x7f08000a;
+        public static final int category_image=0x7f080002;
+        public static final int category_title=0x7f080003;
+        public static final int featured=0x7f080009;
+        public static final int icon=0x7f080004;
+        public static final int label=0x7f080006;
+        public static final int search=0x7f08000b;
+        public static final int searchTextView=0x7f080007;
+        public static final int settings=0x7f08000c;
+        public static final int survivalkit=0x7f080008;
+        public static final int textView01=0x7f080005;
+        public static final int webview=0x7f080001;
     }
     public static final class layout {
         public static final int about=0x7f030000;
-        public static final int category_item=0x7f030001;
-        public static final int category_list=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int search=0x7f030004;
-        public static final int settings=0x7f030005;
+        public static final int article=0x7f030001;
+        public static final int category_item=0x7f030002;
+        public static final int category_list=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int search=0x7f030005;
+        public static final int settings=0x7f030006;
     }
     public static final class menu {
         public static final int wikihow_menu=0x7f070000;

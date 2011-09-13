@@ -29,14 +29,11 @@ import android.util.Log;
 import ch.bbv.wikiHow.model.Article;
 
 /**
- * Simple notes database access helper class. Defines the basic CRUD operations
- * for the notepad example, and gives the ability to list all notes as well as
+ * Simple notes database access helper class. Defines the basic CRUD operations for the notepad example, and gives the ability to list all notes as well as
  * retrieve or modify a specific note.
  * 
- * This has been improved from the first version of this tutorial through the
- * addition of better error handling and also using returning a Cursor instead
- * of using a collection of inner classes (which is less scalable and not
- * recommended).
+ * This has been improved from the first version of this tutorial through the addition of better error handling and also using returning a Cursor instead of
+ * using a collection of inner classes (which is less scalable and not recommended).
  */
 class ArticleDbAdapter {
 
@@ -47,11 +44,10 @@ class ArticleDbAdapter {
     public static final String KEY_HTML = "html";
     public static final String KEY_CATEGORY = "category";
 
-    private DatabaseHelper databaseHelper;
+    private final DatabaseHelper databaseHelper;
 
     /**
-     * Constructor - takes the context to allow the database to be
-     * opened/created
+     * Constructor - takes the context to allow the database to be opened/created
      * 
      * @param ctx
      *            the Context within which to work
@@ -61,12 +57,10 @@ class ArticleDbAdapter {
     }
 
     /**
-     * Open the notes database. If it cannot be opened, try to create a new
-     * instance of the database. If it cannot be created, throw an exception to
-     * signal the failure
+     * Open the notes database. If it cannot be opened, try to create a new instance of the database. If it cannot be created, throw an exception to signal the
+     * failure
      * 
-     * @return this (self reference, allowing this to be chained in an
-     *         initialization call)
+     * @return this (self reference, allowing this to be chained in an initialization call)
      * @throws SQLException
      *             if the database could be neither opened or created
      * @throws IOException
@@ -83,9 +77,8 @@ class ArticleDbAdapter {
     }
 
     /**
-     * Create a new note using the title and body provided. If the note is
-     * successfully created return the new rowId for that note, otherwise return
-     * a -1 to indicate failure.
+     * Create a new note using the title and body provided. If the note is successfully created return the new rowId for that note, otherwise return a -1 to
+     * indicate failure.
      * 
      * @param article
      *            the article to create.
@@ -113,10 +106,10 @@ class ArticleDbAdapter {
         return this.databaseHelper.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
-//    public Cursor fetchAllArticles() {
-//        return this.databaseHelper.query(DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_HTML, KEY_CATEGORY }, null, null, null, null,
-//                null);
-//    }
+    // public Cursor fetchAllArticles() {
+    // return this.databaseHelper.query(DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_HTML, KEY_CATEGORY }, null, null, null, null,
+    // null);
+    // }
 
     /**
      * Returns all categories for which articles are stored.
@@ -192,7 +185,7 @@ class ArticleDbAdapter {
      */
     public List<Article> queryArticle(final String selection) throws SQLException {
         final Cursor cursor = this.databaseHelper.query(true, DATABASE_TABLE, new String[] { KEY_ROWID, KEY_IDENTIFIER, KEY_TITLE, KEY_CATEGORY }, selection,
-                null, null, null, null, null);
+                null, null, null, KEY_TITLE, null);
 
         final ArrayList<Article> articles = new ArrayList<Article>();
         if(cursor != null) {

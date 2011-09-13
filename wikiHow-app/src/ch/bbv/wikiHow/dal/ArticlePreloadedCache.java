@@ -46,16 +46,20 @@ public class ArticlePreloadedCache {
         }
     }
 
-    public List<Article> getPreloadedArticles(final String category) {
-        return this.dbAdapter.queryArticle(ArticleDbAdapter.KEY_CATEGORY + "=" + category);
+    public List<Article> getArticles() {
+        return this.dbAdapter.queryArticle(null);
     }
 
-    public List<String> getPreloadedCategories() {
+    public List<Article> getArticlesByCategory(final String category) {
+        return this.dbAdapter.queryArticle(ArticleDbAdapter.KEY_CATEGORY + " = '" + category + "'");
+    }
+
+    public List<String> getAllCategories() {
         return this.dbAdapter.fetchAllCategories();
     }
 
     // title kann auch * oder % enthalten -> DB ruft like auf...
-    public List<Article> getPreloadedArticlesByTitle(final String title) {
-        return this.dbAdapter.queryArticle(ArticleDbAdapter.KEY_TITLE + " like " + title);
+    public List<Article> queryArticlesByTitle(final String title) {
+        return this.dbAdapter.queryArticle(ArticleDbAdapter.KEY_TITLE + " like '" + title + "'");
     }
 }

@@ -2,6 +2,7 @@ package ch.bbv.wikiHow;
 
 import static ch.bbv.wikiHow.WikiHowAppActivity.TAG;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import ch.bbv.wikiHow.model.ArticlePreloadedCache;
+import ch.bbv.wikiHow.dal.ArticlePreloadedCache;
 
 public class SurvivalKitActivity extends ListActivity {
 
@@ -21,7 +22,13 @@ public class SurvivalKitActivity extends ListActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "SurvivalKitActivity onCreate...");
-        preloadedCache = new ArticlePreloadedCache(this);
+        try {
+            preloadedCache = new ArticlePreloadedCache(this);
+        }
+        catch(final IOException e) {
+            Log.d(TAG, "Could not create ArticlePreloadedChache");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

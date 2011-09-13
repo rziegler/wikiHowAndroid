@@ -1,4 +1,4 @@
-package ch.bbv.wikiHow.model;
+package ch.bbv.wikiHow.dal;
 
 import android.content.ContentValues;
 import android.database.Cursor;

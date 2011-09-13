@@ -14,17 +14,17 @@
  * the License.
  */
 
-package ch.bbv.wikiHow.model;
+package ch.bbv.wikiHow.dal;
 
 import static ch.bbv.wikiHow.WikiHowAppActivity.TAG;
 
 import java.io.IOException;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
+import ch.bbv.wikiHow.model.Article;
 
 /**
  * Simple notes database access helper class. Defines the basic CRUD operations
@@ -36,7 +36,7 @@ import android.util.Log;
  * of using a collection of inner classes (which is less scalable and not
  * recommended).
  */
-public class ArticleDbAdapter {
+class ArticleDbAdapter {
 
     private static final String DATABASE_TABLE = "articles";
     public static final String KEY_ROWID = "_id";
@@ -46,8 +46,6 @@ public class ArticleDbAdapter {
     public static final String KEY_CATEGORY = "category";
 
     private DatabaseHelper databaseHelper;
-    private final Context context;
-    private final String databaseName;
 
     /**
      * Constructor - takes the context to allow the database to be
@@ -56,9 +54,8 @@ public class ArticleDbAdapter {
      * @param ctx
      *            the Context within which to work
      */
-    public ArticleDbAdapter(final Context ctx, final String databaseName) {
-        this.context = ctx;
-        this.databaseName = databaseName;
+    public ArticleDbAdapter(final DatabaseHelper databaseHelper) {
+        this.databaseHelper = databaseHelper;
     }
 
     /**
@@ -74,12 +71,6 @@ public class ArticleDbAdapter {
      */
     public ArticleDbAdapter open() throws IOException {
         Log.d(TAG, "Opening database connection");
-        // TODO: put the following two lines in a factory and create a
-        // CachedDatabaseHelper
-        final PreloadedDatabaseHelper databaseHelper = new PreloadedDatabaseHelper(context, databaseName);
-        databaseHelper.createDatabase();
-        //
-        this.databaseHelper = databaseHelper;
         this.databaseHelper.openDatabase();
         Log.d(TAG, "Writable database " + this.databaseHelper.toString());
         return this;
@@ -98,7 +89,7 @@ public class ArticleDbAdapter {
      *            the article to create.
      * @return rowId or -1 if failed
      */
-    public long createArticle(final Article article) {
+    public long insertArticle(final Article article) {
         final ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_IDENTIFIER, article.getIdentifier());
         initialValues.put(KEY_TITLE, article.getTitle());

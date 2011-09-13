@@ -58,7 +58,7 @@ public class WikiHowAppActivity extends Activity {
 			return true;
 		case R.id.search:
 			Log.d(TAG, "SEARCH MENU selected");
-			return true;
+			return onSearchRequested();
 		case R.id.settings:
 			Log.d(TAG, "SETTINGS MENU selected");
 			intent = new Intent(getBaseContext(), WikiHowPreferencesActivity.class);

@@ -23,6 +23,12 @@
     <string name="search_name">Search</string>
     <string name="search_hint">Search wikiHow articles</string>
     
+    <!-- General instructions in the main activity. -->
+    <string name="search_instructions">Press the search key to search an article.</string>
+
+    <!-- Shown above search results when we receive a search request. -->
+    <string name="search_results">Searching results for \'%s\'.</string>
+    
     <!-- Keys -->
     <string name="fontsize_key">fontSizeKey</string>
     <string name="cachelife_key">cacheLifeKey</string>

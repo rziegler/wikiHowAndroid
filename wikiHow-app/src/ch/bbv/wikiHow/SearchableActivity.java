@@ -17,7 +17,6 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.TextView;
 import ch.bbv.wikiHow.adapter.XmlSearchResultAdapter;
 
@@ -30,7 +29,6 @@ import ch.bbv.wikiHow.adapter.XmlSearchResultAdapter;
 public class SearchableActivity extends ListActivity {
 
 	private TextView textView;
-	private ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,6 @@ public class SearchableActivity extends ListActivity {
 		setContentView(R.layout.search);
 
 		textView = (TextView) findViewById(R.id.searchTextView);
-		listView = (ListView) findViewById(android.R.id.list);
 
 		// get the intent, verify the action and get the query
 		Intent intent = getIntent();

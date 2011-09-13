@@ -51,6 +51,6 @@ public class ArticleCache {
 
     // title kann auch * oder % enthalten -> DB ruft like auf...
     public List<Article> getArticlesByTitle(final String title) {
-        return this.dbAdapter.queryArticle(ArticleDbAdapter.KEY_CATEGORY + " like " + title);
+        return this.dbAdapter.queryArticle(ArticleDbAdapter.KEY_TITLE + " like " + title);
     }
 }
